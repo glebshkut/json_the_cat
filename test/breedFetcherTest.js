@@ -1,6 +1,6 @@
 
-const { fetchBreedDescription } = require('../breedFetcher');
-const { assert } = require('chai');
+const fetchBreedDescription = require('../breedFetcher');
+const assert = require('chai').assert;
 
 describe('fetchBreedDescription', () => {
   it('returns a string description for a valid breed, via callback', (done) => {
@@ -12,19 +12,19 @@ describe('fetchBreedDescription', () => {
       // compare returned description
       assert.equal(expectedDesc, desc.trim());
 
-      // done();
+      done();
     });
   });
 
   it('an invalid/non-existent breed is passed in', (done) => {
     fetchBreedDescription('Siberians', (err, desc) => {
 
-      const expectedDesc = "Data not found";
+      assert.equal(err, "Not found");
 
       // compare returned description
-      assert.equal(expectedDesc, desc.trim());
+      assert.equal(null, desc);
 
-      // done();
+      done();
     });
   });
 });
